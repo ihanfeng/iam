@@ -2,6 +2,10 @@ package it.infn.mw.iam.test.notification;
 
 import static it.infn.mw.iam.test.RegistrationUtils.createRegistrationRequest;
 import static it.infn.mw.iam.test.RegistrationUtils.deleteUser;
+import static it.infn.mw.iam.test.TestUtils.waitIfPortIsUsed;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -129,11 +133,12 @@ public class NotificationConcurrentTests {
     }
 
     barrier.await();
-    executorService.shutdown();
-
+    
     for (Future<Integer> elem : futuresList) {
       elem.get();
     }
+    
+    executorService.shutdown();
 
     int count = notificationRepository.countAllMessages();
     Assert.assertEquals(0, count);
@@ -179,7 +184,7 @@ public class NotificationConcurrentTests {
       try {
         barrier.await();
       } catch (Exception ex) {
-        ex.printStackTrace();
+        throw new RuntimeException(ex);
       }
 
       this.notificationService.clearExpiredNotifications();

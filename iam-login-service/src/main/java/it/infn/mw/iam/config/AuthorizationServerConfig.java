@@ -53,6 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   private OAuth2TokenEntityService tokenServices;
 
   @Autowired
+  @Qualifier("iamClientDetailsEntityService")
   private ClientDetailsEntityService clientDetailsService;
 
   @Autowired
