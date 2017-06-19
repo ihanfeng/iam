@@ -110,7 +110,6 @@ public class NotificationConcurrentTests {
 
   }
 
-  @Test
   public void testConcurrentCleanUp() throws Exception {
 
     notificationService.sendPendingNotifications();
