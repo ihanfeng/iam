@@ -17,6 +17,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ import it.infn.mw.iam.test.TestUtils;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IamLoginService.class)
 @WebIntegrationTest
+@Ignore
 public class NotificationConcurrentTests {
 
   @Value("${notification.cleanupAge}")
@@ -110,6 +112,7 @@ public class NotificationConcurrentTests {
 
   }
 
+  @Test
   public void testConcurrentCleanUp() throws Exception {
 
     notificationService.sendPendingNotifications();
